@@ -1,0 +1,95 @@
+===========================================================
+   Chatbot Documentation: Financial Insights Prototype
+===========================================================
+
+1. OVERVIEW
+-----------
+This project is a rule-based financial chatbot designed to provide quick insights into key financial metrics for Microsoft, Apple, and Tesla based on data extracted from their latest 10-K filings.
+
+The chatbot reads a preprocessed CSV file containing financial data for the last three fiscal years and responds to a set of predefined financial queries using conditional logic (if/elif statements).
+
+It demonstrates the foundation for an AI-driven chatbot, focusing on structured responses before integrating NLP or machine learning features.
+
+-----------------------------------------------------------
+
+2. HOW IT WORKS
+---------------
+1. Data Input
+   - The chatbot reads a cleaned CSV file that includes:
+     Company | Fiscal Year | Total Revenue | Net Income | Total Assets | Total Liabilities | Cash from Ops
+   - Pre-calculated growth columns (e.g., Revenue Growth %) enable percentage-based insights.
+
+2. Rule-Based Logic
+   - The chatbot analyzes user input (converted to lowercase) and checks for key phrases.
+   - Recognized queries trigger responses built from the DataFrame using pandas filtering.
+
+3. Dynamic Filtering
+   - For company-specific queries (e.g., “Show Apple revenue change”), the chatbot extracts the correct company name dynamically.
+   - It computes year-over-year growth using pandas' pct_change() method.
+
+4. Output
+   - Responses are formatted with clear text and comma separators for readability.
+
+Example Output:
+-----------------------------------------------------------
+Chatbot: Here’s the total revenue (in USD millions) for each company in fiscal year 2024:
+- Apple: 391,035
+- Microsoft: 282,445
+- Tesla: 96,773
+-----------------------------------------------------------
+
+-----------------------------------------------------------
+
+3. PREDEFINED QUERIES
+---------------------
+| Query Type              | Example User Input               | Response Description |
+|--------------------------|----------------------------------|----------------------|
+| Total Revenue            | "What is the total revenue?"     | Lists total revenue for each company in the latest year |
+| Highest Net Income       | "Which company had the highest net income?" | Returns company with highest net income |
+| Revenue Change (by company) | "Show Tesla revenue change"   | Shows year-over-year revenue change for a company |
+| Average Growth           | "What are the average growth rates?" | Shows average growth across three years |
+| Cash Flow                | "Show me cash flow data"         | Lists cash flow from operating activities |
+| Help                     | "help"                           | Lists all supported queries and companies |
+
+-----------------------------------------------------------
+
+4. LIMITATIONS
+--------------
+- Uses keyword matching only; cannot interpret varied phrasing.
+- Limited to Microsoft, Apple, and Tesla.
+- Static dataset (no live data connection).
+- No memory or context awareness (each query processed independently).
+- Future versions could integrate NLP or financial APIs for real-time updates.
+
+-----------------------------------------------------------
+
+5. HOW TO RUN THE CHATBOT
+--------------------------
+1. Ensure dependencies are installed:
+   > pip install pandas
+
+2. Launch in VS Code or a terminal:
+   > python chatbot_financials.py
+
+Example Interaction:
+-----------------------------------------------------------
+You: What is the total revenue?
+Chatbot: Here’s the total revenue (in USD millions) for each company in fiscal year 2024:
+- Apple: 391,035
+- Microsoft: 282,445
+- Tesla: 96,773
+
+You: Show Apple revenue change
+Chatbot: Apple's revenue changed by -2.35% in the most recent fiscal year.
+
+You: help
+Chatbot: You can ask me questions like:
+- What is the total revenue?
+- Which company had the highest net income?
+- Show [company] revenue change (e.g., 'Show Apple revenue change').
+- What are the average growth rates?
+- Show me cash flow data.
+Supported companies: Microsoft, Apple, Tesla.
+-----------------------------------------------------------
+
+===========================================================
